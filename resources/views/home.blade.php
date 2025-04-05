@@ -9,6 +9,11 @@
         <div class="card-header text-center">
           Contents
         </div>
+        @if (session('status'))
+        <div class="alert alert-success">
+          {{ session('status') }}
+        </div>          
+        @endif
         <div class="card-body">
           @foreach ($data as $post )
             <div>

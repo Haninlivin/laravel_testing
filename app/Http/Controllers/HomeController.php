@@ -13,9 +13,11 @@ class HomeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = Post::all();
+        // dd(Post::pluck('name'));
+        $data = Post::where('user_id')->orderBy('id', 'desc')->get();
+        $request->session()->flash('status', 'Task was successful!');
         return view("home", compact("data"));
     }
 
@@ -40,6 +42,11 @@ class HomeController extends Controller
         $validated = $request->validated();
         Post::create($validated);
         return redirect('/post');
+        $post = new Post();
+        $post->name = $request->name;
+        $post->description = $request->description;
+        $post->save();
+        return redirect('/post')->with('status', 'New Post Created!');
     }
 
     /**
