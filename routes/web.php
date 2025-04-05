@@ -10,7 +10,7 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ContactController;
 
 //Home
-// Route::get('/', [HomeController::class, 'index']);
+// Route::get('/', [HomeController::class, 'testroot'])->name('root');
 
 Route::resource('post', HomeController::class);
 

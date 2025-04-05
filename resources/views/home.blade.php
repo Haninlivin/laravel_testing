@@ -3,6 +3,7 @@
 <div class="container">
   <div>
     <a href="/post/create" class="btn btn-success mb-3">Add New</a>
+    <a href="logout" class="btn btn-success mb-3">Logout</a>
   </div>
     <div class="card">
         <div class="card-header text-center">
