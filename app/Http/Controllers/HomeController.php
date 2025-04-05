@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use view;
 use App\Models\Post;
-use Illuminate\Http\Request;
-use App\Http\Requests\showPostRequest;
 use App\Models\category;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Http\Requests\showPostRequest;
+use App\Mail\PostCreated;
+use App\Mail\PostStored;
 
 class HomeController extends Controller
 {
@@ -40,13 +44,13 @@ class HomeController extends Controller
         // $post->description = $request->description;
         // $post->save();
         $validated = $request->validated();
-        Post::create($validated);
-        return redirect('/post');
-        $post = new Post();
-        $post->name = $request->name;
-        $post->description = $request->description;
-        $post->save();
-        return redirect('/post')->with('status', 'New Post Created!');
+        $post = Post::create($validated + ['user_id' => Auth::user()->id]);
+        // return redirect('/post');
+        // $post = new Post();
+        // $post->name = $request->name;
+        // $post->description = $request->description;
+        // $post->save();
+        return redirect('/post')->with('status', config('ap.message.created'));
     }
 
     /**
